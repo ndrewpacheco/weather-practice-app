@@ -12,6 +12,7 @@ function Stack() {
     }
     return loop;
   }
+
   return <ul className='stack'>{loopCards()}</ul>;
 }
 

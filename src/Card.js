@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
 
 const cityName = "Toronto";
-const apiKey = "643d59b424b19869f3a44f4d34f10322";
+// "643d59b424b19869f3a44f4d34f10322";
+const apiOne = "8b2faa19449a5991da";
+const apiTwo = "46636565f83743";
+
 const date = new Date();
 const units = "metric";
-const url = `http://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${apiKey}&units=${units}`;
+const url = `http://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${
+  apiOne + apiTwo
+}&units=${units}`;
 const daysOfTheWeek = [
   "Sun",
   "Mon",
@@ -27,10 +32,13 @@ function Card(props) {
   const [icon, setIcon] = useState();
   const [high, setHigh] = useState();
   const [low, setLow] = useState();
+  const formatClass = props.day === 0 ? "card current-day" : "card";
+
   useEffect(() => {
     fetch(url)
       .then((response) => (response = response.json()))
       .then((data) => {
+        console.log(data);
         setIcon(data.list[dayDifference].weather[0].icon);
         setHigh(data.list[dayDifference].main.temp_max);
         setLow(data.list[dayDifference].main.temp_min);
@@ -38,14 +46,8 @@ function Card(props) {
       .catch((error) => console.log("error " + error));
   }, [dayDifference]);
 
-  function formatClass() {
-    let value = "card";
-    if (props.day === 0) value += " current-day";
-    return value;
-  }
-
   return (
-    <div className={formatClass()}>
+    <div className={formatClass}>
       <h3>{daysOfTheWeek[date.getDay() + props.day]}</h3>
       {icon && high && low && (
         <>

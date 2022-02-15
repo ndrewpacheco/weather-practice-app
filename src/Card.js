@@ -1,15 +1,11 @@
 import { useEffect, useState } from "react";
 
 const cityName = "Toronto";
-// "643d59b424b19869f3a44f4d34f10322";
-const apiOne = "8b2faa19449a5991da";
-const apiTwo = "46636565f83743";
 
+const key = process.env.REACT_APP_API_KEY;
 const date = new Date();
 const units = "metric";
-const url = `http://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${
-  apiOne + apiTwo
-}&units=${units}`;
+const url = `http://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${key}&units=${units}`;
 const daysOfTheWeek = [
   "Sun",
   "Mon",
